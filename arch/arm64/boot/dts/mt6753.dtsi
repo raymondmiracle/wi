@@ -1623,6 +1623,13 @@ initrd=0x44000000,0x300000 loglevel=8 androidboot.hardware=mt6735";
 			compatible = "mediatek,mt6753p1_64-lcm";
 		};
 
+		lcm_j5080_gpio_node: lcm_j5080_gpio_node {
+			compatible = "mediatek,lcm_j5080_gpio_node";
+			lcm_gpio_enn = <&pio 78 0>;
+			lcm_gpio_enp = <&pio 80 0>;
+			lcm_rst_pin = <&pio 129 0>;
+		};
+
 		lcm_mode: lcm_mode {
 			compatible = "mediatek,lcm_mode";
 		};
