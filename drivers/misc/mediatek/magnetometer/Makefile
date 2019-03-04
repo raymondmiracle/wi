@@ -43,3 +43,4 @@ obj-$(CONFIG_MTK_YAS530)	+=  yamaha530/
 obj-$(CONFIG_MTK_YAS532)   +=  yamaha532/
 obj-$(CONFIG_MTK_YAS532_NEW)   +=  yamaha532-new/
 obj-$(CONFIG_MTK_YAS537)	+=  yamaha537/
+obj-$(CONFIG_MTK_MMC3524X)	+=  mmc3524x/
