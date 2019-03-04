@@ -76,21 +76,10 @@ memory@00000000 {
 	};
  /* sensor standardization */
         cust_accel@0 {
-		compatible				= "mediatek,mpu6050g";
+		compatible				= "mediatek,bma223";
 		i2c_num				= <2>;
-		i2c_addr				= <0x68 0 0 0>;
-		direction				= <4>;
-		power_id				= <0xffff>;
-		power_vol				= <0>;
-		firlen					= <0>;
-		is_batch_supported			= <0>;
-		};
-
-		cust_accel@1 {
-		compatible				= "mediatek,KXTJ2_1009";
-		i2c_num					= <2>;
-		i2c_addr				= <0x1c 0 0 0>;
-		direction				= <6>;
+		i2c_addr				= <0x18 0 0 0>;
+		direction				= <3>;
 		power_id				= <0xffff>;
 		power_vol				= <0>;
 		firlen					= <0>;
@@ -98,19 +87,19 @@ memory@00000000 {
 		};
 
 		cust_alsps@0 {
-		compatible				= "mediatek,LTR553";
+		compatible				= "mediatek,ltr579";
 		i2c_num					= <2>;
-		i2c_addr				= <0x23 0 0 0>;
+		i2c_addr				= <0x53 0 0 0>;
 		polling_mode_ps			= <0>;
 		polling_mode_als		= <1>;
 		power_id				= <0xffff>;
 		power_vol				= <0>;
 /* Total has 15 level*/
-		als_level	= <8 18 41 83 789 1805 2881 4191 5672 7227 8824 10569 65535 65535 65535>;
-/*  Total has 16 range*/
-		als_value	= <0 38 95 190 1250 1500 1700 1920 2900 5745 8500 10000 10243 10243 10243 10243>;
-		ps_threshold_high		=  <0x250>;
-		ps_threshold_low		=  <0xD2>;
+		als_level = <0x0 0xd 0x16 0x46 0x55 0xaa 0x104 0x3b6 0x514 0x640 0x960 0xc80 0x1a2c 0x251c 0x2cec>;
+/* Total has 16 range*/
+		als_value = <0x0 0x64 0xc8 0x12c 0x190 0x1f4 0x320 0x5aa 0x6f4 0x92e 0xbb8 0x1856 0x2328 0x3138 0x445c 0x4e21>;
+		ps_threshold_high		=  <0x78>;
+		ps_threshold_low		=  <0x2D>;
 		is_batch_supported_ps	= <0>;
 		is_batch_supported_als	= <0>;
 		};
@@ -125,10 +114,10 @@ memory@00000000 {
 		};
 
 		cust_gyro@0 {
-		compatible				= "mediatek,mpu6050gy";
+		compatible				= "mediatek,mmc3524x";
 		i2c_num				= <2>;
-		i2c_addr				= <0x69 0 0 0>;
-		direction				= <4>;
+		i2c_addr				= <0x30 0 0 0>;
+		direction				= <6>;
 		power_id				= <0xffff>;
 		power_vol				= <0>;
 		firlen					= <0>;
@@ -185,28 +174,8 @@ memory@00000000 {
 	status = "okay";
 
 };
-
-
-&pio {
-	hall_intpin_cfg: hallpincfg {
-	    pins_cmd_dat {
-			pins = <PINMUX_GPIO0__FUNC_GPIO0>;
-			slew-rate = <0>;
-			bias-pull-up = <00>;
-		};
-	};
-	hall_intpin_default: halldefaultcfg {
-	};
-
-};
-&tinno_hall {
-	pinctrl-names = "pin_default", "pin_cfg";
-	pinctrl-0 = <&hall_intpin_default>;
-	pinctrl-1 = <&hall_intpin_cfg>;
 	status = "okay";
 };
-
-
 
 &gyro {
 	pinctrl-names = "pin_default", "pin_cfg";
@@ -293,25 +262,21 @@ memory@00000000 {
 };
 &accdet {
 		accdet-mic-vol = <7>;
-		//headset-mode-setting = <0x500 0x200 1 0x1F0 0x800 0x800 0x20>;
-		headset-mode-setting = <0x500 0x500 1 0x1F0 0x800 0x800 0x20>;//yixuhong 20160509 modify mic noise
+		headset-mode-setting = <0x500 0x400 1 0x1F0 0x800 0x800 0x20>;
 		accdet-plugout-debounce = <20>;
-		/*1:ACC mode, 2:low cost without in bias, 6:low cost with in bias*/
 		accdet-mic-mode = <6>;
-		/*0--MD_MAX--UP_MAX--DW_MAX*/
-		headset-three-key-threshold = <0 80 220 500>;
-		/*0--MD_MAX--VOICE_MAX--UP_MAX--DW_MAX*/
-		headset-four-key-threshold = <0 58 121 192 450>;
+		headset-three-key-threshold = <0x0 0x50 0xdc 0x1f4>;
+		headset-four-key-threshold = <0x0 0x3a 0x79 0xc0 0x1c2>;
 };
 &touch {
 	tpd-resolution = <720 1280>;
 	use-tpd-button = <0>;
 	tpd-key-num = <3>;
-	tpd-key-local= <139 172 158 0>;
-	tpd-key-dim-local = <90 883 100 40 230 883 100 40 370 883 100 40 0 0 0 0>;
+	tpd-key-local = <0x8b 0xac 0x9e 0x0>;
+	tpd-key-dim-local = <0x5a 0x373 0x64 0x28 0xe6 0x373 0x64 0x28 0x172 0x373 0x64 0x28 0x0 0x0 0x0 0x0>;
 	tpd-max-touch-num = <5>;
 	tpd-filter-enable = <0>;
-	tpd-filter-pixel-density = <124>;
+	tpd-filter-pixel-density = <186>;
 	tpd-filter-custom-prameters = <0 0 0 0 0 0 0 0 0 0 0 0>;
 	tpd-filter-custom-speed = <0 0 0>;
 	pinctrl-names = "default", "state_eint_as_int", "state_eint_output0", "state_eint_output1",
@@ -324,40 +289,41 @@ memory@00000000 {
 	pinctrl-5 = <&CTP_pins_rst_output1>;
 	status = "okay";
 };
+
 &pio {
 	CTP_pins_default: eint0default {
 	};
 	CTP_pins_eint_as_int: eint@0 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO10__FUNC_GPIO10>;
+			pins = <PINMUX_GPIO10__FUNC_GPIO10>; //PINMUX_GPIO125__FUNC_GPIO125
 			slew-rate = <0>;
 			bias-disable;
 		};
 	};
 	CTP_pins_eint_output0: eintoutput0 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO10__FUNC_GPIO10>;
+			pins = <PINMUX_GPIO10__FUNC_GPIO10>; //PINMUX_GPIO126__FUNC_GPIO126
 			slew-rate = <1>;
 			output-low;
 		};
 	};
 	CTP_pins_eint_output1: eintoutput1 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO10__FUNC_GPIO10>;
+			pins = <PINMUX_GPIO10__FUNC_GPIO10>; //PINMUX_GPIO127__FUNC_GPIO127
 			slew-rate = <1>;
 			output-high;
 		};
 	};
 	CTP_pins_rst_output0: rstoutput0 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO62__FUNC_GPIO62>;
+			pins = <PINMUX_GPIO62__FUNC_GPIO62>; //PINMUX_GPIO128__FUNC_GPIO128
 			slew-rate = <1>;
 			output-low;
 		};
 	};
 	CTP_pins_rst_output1: rstoutput1 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO62__FUNC_GPIO62>;
+			pins = <PINMUX_GPIO62__FUNC_GPIO62>; //PINMUX_GPIO129__FUNC_GPIO129
 			slew-rate = <1>;
 			output-high;
 		};
