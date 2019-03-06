@@ -772,17 +772,9 @@ memory@00000000 {
 /* USB GPIO Kernal Standardization end */
 
 &i2c1 {
-	cap_touch@38 {
-		compatible = "mediatek,ft6xxx_touch";
-		reg = <0x38>;
-		status = "okay";
-	};
-
-};
-&i2c1 {
-	cap_touch@39 {
-		compatible = "mediatek,s2333";
-		reg = <0x39>;
+	cap_touch@20 {
+		compatible = "mediatek,cap_touch";
+		reg = <0x20>;
 		status = "okay";
 	};
 
