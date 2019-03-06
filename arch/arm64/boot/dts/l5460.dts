@@ -164,8 +164,6 @@ memory@00000000 {
 	status = "okay";
 
 };
-	status = "okay";
-};
 
 &gyro {
 	pinctrl-names = "pin_default", "pin_cfg";
