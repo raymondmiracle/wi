@@ -1,3 +1,4 @@
+//tuwenzan@wind-mobi.com add this at 20161108 begin
 /*
  * Synaptics DSX touchscreen driver
  *
@@ -63,9 +64,9 @@
 
 extern unsigned char g_log_enable;
 #define TP_DEBUG(fmt,arg...)          do{\
-    if(g_log_enable)\
-    printk("%s %d " fmt, __func__, __LINE__, ##arg);\
-}while(0)
+                                            if(g_log_enable)\
+                                                 printk("%s %d " fmt, __func__, __LINE__, ##arg);\
+                                        }while(0)
 #define PDT_PROPS (0X00EF)
 #define PDT_START (0x00E9)
 #define PDT_END (0x00D0)
@@ -418,3 +419,4 @@ static inline void hstoba(unsigned char *dest, unsigned short src)
 }
 
 #endif
+//tuwenzan@wind-mobi.com add this at 20161108 end

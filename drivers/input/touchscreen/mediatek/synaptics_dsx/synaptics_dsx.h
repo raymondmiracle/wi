@@ -1,3 +1,4 @@
+//tuwenzan@wind-mobi.com add this at 20161108 begin
 /*
  * Synaptics DSX touchscreen driver
  *
@@ -84,3 +85,4 @@ struct synaptics_dsx_platform_data {
 };
 
 #endif
+//tuwenzan@wind-mobi.com add this at 20161108 end
