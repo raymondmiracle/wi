@@ -3845,10 +3845,6 @@ extern char ctp_vendor[5];
 static void fwu_startup_fw_update_work(struct work_struct *work)
 {
 	static unsigned char do_once = 1;
-	unsigned short my_config_area;
-	unsigned char *my_read_config_buf;
-	unsigned char *GD_lockdown = "WOODs360302";
-	unsigned char *Biel_lockdown = "WOODs360304";
 #ifdef WAIT_FOR_FB_READY
 	unsigned int timeout;
 	struct synaptics_rmi4_data *rmi4_data = fwu->rmi4_data;
@@ -3857,7 +3853,6 @@ static void fwu_startup_fw_update_work(struct work_struct *work)
 	if (!do_once)
 		return;
 	do_once = 0;
-	//printk("twz enter fwu_startup_fw_update_work\n");
 #ifdef WAIT_FOR_FB_READY
 	timeout = FB_READY_TIMEOUT_S * 1000 / FB_READY_WAIT_MS + 1;
 
@@ -3872,29 +3867,9 @@ static void fwu_startup_fw_update_work(struct work_struct *work)
 		}
 	}
 #endif
-//	printk("twz start enter synaptics_fw_updater\n");
-	my_config_area = fwu->config_area;
 	fwu->config_area = PM_CONFIG_AREA;
 	fwu_do_read_config();
-	my_read_config_buf = fwu->read_config_buf;
-//	printk("twz lockdown fwu->read_config_buf %s\n",fwu->read_config_buf);
-	fwu->config_area = my_config_area;
-	if(!strcmp(GD_lockdown,my_read_config_buf)){
-		printk("twz enter GD_lockdown WOODs360302\n");
-#ifdef CONFIG_WIND_DEVICE_INFO
-		sprintf(ctp_vendor,"GD");
-#endif
-		synaptics_fw_updater(FirmwareImage);
-	}else if(!strcmp(Biel_lockdown,my_read_config_buf)){
-		printk("twz enter Biel_lockdown WOODs360304\n");
-#ifdef CONFIG_WIND_DEVICE_INFO
-		sprintf(ctp_vendor,"Biel");
-#endif
-		synaptics_fw_updater(FirmwareImage);
-	}else{
-		printk("fail get TP lockdown info\n");
-	}
-	 
+	synaptics_fw_updater(FirmwareImage);
 	return;
 }
 #endif
