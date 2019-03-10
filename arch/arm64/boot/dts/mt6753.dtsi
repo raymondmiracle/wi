@@ -1312,6 +1312,17 @@ initrd=0x44000000,0x300000 loglevel=8 androidboot.hardware=mt6735";
 			mediatek,mapping_table_entry = <0>;
 			mediatek,max_deint_cnt = <4>;
 			mediatek,deint_possible_irq = <187 188 189 190>;
+			mediatek,debtime_setting_entry = <10>;
+			mediatek,debtime_setting_array	= <0 125>,
+            <1 250>,
+            <2 500>,
+            <3 1000>,
+            <4 16000>,
+            <5 32000>,
+            <6 64000>,
+            <7 128000>,
+            <8 256000>,
+            <9 512000>;
 		};
 
 
@@ -1861,6 +1872,16 @@ initrd=0x44000000,0x300000 loglevel=8 androidboot.hardware=mt6735";
 			compatible = "mediatek,mt6735-touch",
 						"mediatek,mt6735m-touch",
 						"mediatek,mt6753-touch";
+			vtouch-supply = <&mt_pmic_vgp1_ldo_reg>;
+		};
+
+		touch_panel: touch_panel {
+ 			compatible = "mediatek,TOUCH_PANEL-eint";
+			vtouch-supply = <&mt_pmic_vgp1_ldo_reg>;
+ 		};
+
+		touchsupply: touchsupply@ {
+			compatible = "mediatek,mt_pmic_regulator_supply";
 			vtouch-supply = <&mt_pmic_vgp1_ldo_reg>;
 		};
 

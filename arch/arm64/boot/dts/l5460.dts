@@ -256,25 +256,26 @@ memory@00000000 {
 		headset-three-key-threshold = <0x0 0x50 0xdc 0x1f4>;
 		headset-four-key-threshold = <0x0 0x3a 0x79 0xc0 0x1c2>;
 };
+
 &touch {
 	tpd-resolution = <720 1280>;
 	use-tpd-button = <0>;
 	tpd-key-num = <3>;
-	tpd-key-local = <0x8b 0xac 0x9e 0x0>;
-	tpd-key-dim-local = <0x5a 0x373 0x64 0x28 0xe6 0x373 0x64 0x28 0x172 0x373 0x64 0x28 0x0 0x0 0x0 0x0>;
+	tpd-key-local = <139 172 158 0>;
+	tpd-key-dim-local = <90 883 100 40 230 883 100 40 370 883 100 40 0 0 0 0>;
 	tpd-max-touch-num = <5>;
-	tpd-filter-enable = <0>;
 	tpd-filter-pixel-density = <186>;
 	tpd-filter-custom-prameters = <0 0 0 0 0 0 0 0 0 0 0 0>;
 	tpd-filter-custom-speed = <0 0 0>;
-	pinctrl-names = "default", "state_eint_as_int", "state_eint_output0", "state_eint_output1",
-		"state_rst_output0", "state_rst_output1";
+	pinctrl-names = "default", "state_eint_as_int", "state_eint_output0", "state_eint_output1", "state_rst_output0", "state_rst_output1", "state_rst_output2", "state_rst_output3";
 	pinctrl-0 = <&CTP_pins_default>;
 	pinctrl-1 = <&CTP_pins_eint_as_int>;
 	pinctrl-2 = <&CTP_pins_eint_output0>;
 	pinctrl-3 = <&CTP_pins_eint_output1>;
 	pinctrl-4 = <&CTP_pins_rst_output0>;
 	pinctrl-5 = <&CTP_pins_rst_output1>;
+	pinctrl-6 = <&CTP_pins_rst_output2>;
+	pinctrl-7 = <&CTP_pins_rst_output3>;
 	status = "okay";
 };
 
@@ -283,42 +284,49 @@ memory@00000000 {
 	};
 	CTP_pins_eint_as_int: eint@0 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO10__FUNC_GPIO10>; //PINMUX_GPIO125__FUNC_GPIO125
+			pins = <PINMUX_GPIO10__FUNC_GPIO10>;
 			slew-rate = <0>;
-			bias-disable;
+			bias-pull-up = <0>;
 		};
 	};
 	CTP_pins_eint_output0: eintoutput0 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO10__FUNC_GPIO10>; //PINMUX_GPIO126__FUNC_GPIO126
+			pins = <PINMUX_GPIO10__FUNC_GPIO10>;
 			slew-rate = <1>;
 			output-low;
 		};
 	};
 	CTP_pins_eint_output1: eintoutput1 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO10__FUNC_GPIO10>; //PINMUX_GPIO127__FUNC_GPIO127
+			pins = <PINMUX_GPIO10__FUNC_GPIO10>;
 			slew-rate = <1>;
 			output-high;
 		};
 	};
 	CTP_pins_rst_output0: rstoutput0 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO62__FUNC_GPIO62>; //PINMUX_GPIO128__FUNC_GPIO128
+			pins = <PINMUX_GPIO60__FUNC_GPIO60>;
 			slew-rate = <1>;
 			output-low;
 		};
 	};
 	CTP_pins_rst_output1: rstoutput1 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO62__FUNC_GPIO62>; //PINMUX_GPIO129__FUNC_GPIO129
+			pins = <PINMUX_GPIO60__FUNC_GPIO60>;
 			slew-rate = <1>;
 			output-high;
 		};
 	};
-	AKM_pins_rst_output1: akmoutput1 {
+	CTP_pins_rst_output2: rstoutput2 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO61__FUNC_GPIO61>;
+			pins = <PINMUX_GPIO60__FUNC_GPIO60>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+	CTP_pins_rst_output3: rstoutput3 {
+		pins_cmd_dat {
+			pins = <PINMUX_GPIO60__FUNC_GPIO60>;
 			slew-rate = <1>;
 			output-high;
 		};
@@ -775,14 +783,4 @@ memory@00000000 {
 		reg = <0x20>;
 		status = "okay";
 	};
-
-};
-
-&i2c2 {
-	gsensor@e {
-		compatible = "mediatek,kxtj2_gsensor";
-		reg = <0xe>;
-		status = "okay";
-	};
-
 };
